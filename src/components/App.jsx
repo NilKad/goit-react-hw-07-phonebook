@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux';
 export const App = () => {
   const isLoading = useSelector(state => state.contacts.isLoading);
   const error = useSelector(state => state.contacts.error);
-
+  // console.log('error:', error);
+  // console.log('typeOff', typeof error);
   return (
     <div>
       {isLoading && '...Loading...'}
-      {error && error}
+      {error && 'error!!!!'}
       <h1>Phonebook</h1>
       <ContactForm />
       <h2>Contacts</h2>

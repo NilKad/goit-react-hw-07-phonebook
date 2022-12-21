@@ -18,31 +18,32 @@ export const contactsSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getAllContacts.pending]: state => {
-      state.error = false;
+      state.error = null;
       state.isLoading = true;
     },
     [getAllContacts.fulfilled]: (state, { payload }) => {
       state.contactsList = payload;
       state.isLoading = false;
     },
-    [getAllContacts.rejected]: state => {
+    [getAllContacts.rejected]: (state, { error }) => {
       state.isLoading = false;
-      state.error = true;
+      // console.log('error payload: ', error);
+      state.error = error;
     },
     [addContact.pending]: state => {
-      state.error = false;
+      state.error = null;
       state.isLoading = true;
     },
     [addContact.fulfilled]: (state, { payload }) => {
       state.contactsList.push(payload);
       state.isLoading = false;
     },
-    [addContact.rejected]: state => {
+    [addContact.rejected]: (state, { error }) => {
+      state.error = error;
       state.isLoading = false;
-      state.error = true;
     },
     [delContact.pending]: state => {
-      state.error = false;
+      state.error = null;
       state.isLoading = true;
     },
     [delContact.fulfilled]: (state, { payload }) => {
@@ -51,9 +52,9 @@ export const contactsSlice = createSlice({
       );
       state.isLoading = false;
     },
-    [delContact.rejected]: state => {
+    [delContact.rejected]: (state, { error }) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = error;
     },
   },
 });
